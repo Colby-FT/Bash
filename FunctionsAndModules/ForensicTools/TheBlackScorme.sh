@@ -1,7 +1,6 @@
 #!/bin/bash
 #ToDo Works great when declared and called as a function.  Fails to find most of the devices when called as a script.
 
-#Main function
 TheBlackScorme() {
     local use_dc3dd=false
     local log_dir=""
