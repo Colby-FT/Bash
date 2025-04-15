@@ -1,0 +1,1562 @@
+# Table of Contents
+# 1. Help and Discovery
+# 2. File Management
+#    2.1 File System Navigation & File Manipulation
+#    2.2 Permissions and Ownership
+# 3. System Administration
+#    3.1 Service Management
+#    3.2 User and Group Management
+#    3.3 Process Management
+# 4. Networking
+# 5. Compression and Archiving
+# 6. Package Management
+# 7. Remote Commands
+# 8. Cron Jobs
+# 9. PostgreSQL
+# 10. Apache
+# 11. Securing, Monitoring, and Logging
+#    11.1 Securing the System
+#    11.2 Monitoring and Logging
+# 12. Scripting Essentials
+#    12.1 Parameter Definitions and Attributes
+#    12.2 Shell Variables and I/O
+#    12.3 Control Structures and Functions
+#    12.4 Error Handling and Best Practices
+# 13. Regular Expressions
+# 14. Useful File Paths
+# 15. Miscellaneous
+#    15.1 Miscellaneous Commands
+#    15.2 Crack Root Password
+
+
+###########################################################################
+
+
+#region Help and Discovery
+# Commands to explore and discover shell commands and their usage.
+
+man
+    # Displays the manual page for a command.
+
+    # Display the manual for `ls`
+        man ls
+
+<command> --help
+    # Displays a brief help message for a command.
+
+    # Show help for `ls`
+        ls --help
+
+apropos
+    # Searches the manual pages for a keyword.
+
+    # Search for "network" in manual pages
+        apropos network
+
+which
+    # Shows the full path of a command.
+
+    # Find the path of `bash`
+        which bash
+
+type
+    # Displays information about a command (e.g., alias, function, or binary).
+
+    # Check the type of `ls`
+        type ls
+
+whatis
+    # Displays a one-line description of a command.
+
+    # Get a description of `ls`
+        whatis ls
+
+autoload -Uz run-help
+    # Enables the `run-help` command for enhanced help in Zsh.
+
+    # Use `run-help` for `cd`
+        run-help cd
+
+whence
+    # Displays information about a command (similar to `type` in Bash).
+
+    # Check the details of `ls`
+        whence ls
+#endregion
+
+#region File Management
+# File System Navigation & File Manipulation + Permissions and Ownership
+
+#region File System Navigation & File Manipulation
+
+# Commands to navigate and manage the file system.
+
+pwd
+    # Prints the current working directory.
+
+    # Display the current directory
+        pwd
+
+ls
+    # Lists files and directories.
+
+    # List files in long format
+        ls -l
+
+cd
+    # Changes the current directory.
+
+    # Navigate to `/home/user`
+        cd /home/user
+
+mkdir
+    # Creates a new directory.
+
+    # Create a directory named `my_folder`
+        mkdir my_folder
+
+rmdir
+    # Removes an empty directory.
+
+    # Remove the directory `my_folder`
+        rmdir my_folder
+
+rm
+    # Deletes a file or directory (use `-r` for directories).
+
+    # Remove a directory and its contents
+        rm -r my_folder
+
+cp
+    # Copies files or directories.
+
+    # Copy `file.txt` to `/tmp/`
+        cp file.txt /tmp/
+
+mv
+    # Moves or renames files or directories.
+
+    # Rename `file.txt` to `new_file.txt`
+        mv file.txt new_file.txt
+
+find
+    # Searches for files or directories.
+
+    # Find all `.txt` files in `/home`
+        find /home -name "*.txt"
+
+# Commands to view and manipulate file contents.
+
+cat
+    # Displays the contents of a file.
+
+    # View the contents of `file.txt`
+        cat file.txt
+
+less
+    # Views a file one screen at a time.
+
+    # View `file.txt` interactively
+        less file.txt
+
+head
+    # Displays the first 10 lines of a file.
+
+    # Show the first 10 lines of `file.txt`
+        head file.txt
+
+tail
+    # Displays the last 10 lines of a file.
+
+    # Show the last 10 lines of `file.txt`
+        tail file.txt
+
+touch
+    # Creates an empty file or updates the timestamp of an existing file.
+
+    # Create a new file named `new_file.txt`
+        touch new_file.txt
+
+echo
+    # Writes text to a file (overwrites).
+
+    # Write "Hello, World!" to `file.txt`
+        echo "Hello, World!" > file.txt
+
+echo
+    # Appends text to a file.
+
+    # Append "Hello again!" to `file.txt`
+        echo "Hello again!" >> file.txt
+
+
+# Commands to compress and extract files.
+
+tar -cvf
+    # Creates a tar archive.
+
+    # Create `archive.tar` with `file1` and `file2`
+        tar -cvf archive.tar file1 file2
+
+tar -xvf
+    # Extracts a tar archive.
+
+    # Extract `archive.tar`
+        tar -xvf archive.tar
+
+gzip
+    # Compresses a file using gzip.
+
+    # Compress `file.txt`
+        gzip file.txt
+
+gunzip
+    # Decompresses a gzip file.
+
+    # Decompress `file.txt.gz`
+        gunzip file.txt.gz
+
+#endregion
+
+#region Permissions and Ownership
+# Commands to manage file and directory permissions and ownership.
+
+chmod
+    # Changes the permissions of a file or directory.
+
+    # Set permissions to `755` for `script.sh`
+        chmod 755 script.sh
+
+chown
+    # Changes the ownership of a file or directory.
+
+    # Change the owner to `user` and group to `group` for `file.txt`
+        chown user:group file.txt
+
+ls -l
+    # Lists files with their permissions.
+
+    # List files in a directory with permissions
+        ls -l /path/to/directory
+#endregion
+
+#endregion
+
+#region System Administration
+# Service Management + User and Group Management + Process Management
+
+#region Service Management
+
+#systemd is the init system used by debian based distributions like Kali Linux. It is not only responsible for the boot sequence but also for managing services and daemons. It is a replacement for the older SysVinit system.
+
+# Commands to manage services and daemons.
+
+systemctl
+    # System and service manager for Linux.
+
+    # Restart a service
+        systemctl restart <serviceName>
+
+    # Stop a service
+        systemctl stop <serviceName>
+
+    # Enable a service to start on boot
+        systemctl enable <serviceName>
+
+    # Disable a service from starting on boot
+        systemctl disable <serviceName>
+
+    # List all services
+        systemctl show services
+
+    # List services containing a string
+        systemctl list-units --type=service *<string>*
+
+    # Get the status of a specific service
+        service-control --status <serviceName>
+
+    # Start a service
+        service-control --start <serviceName>
+
+    # Start all services
+        service-control --start --all
+
+    # Generate new SSH keys, enable SSH service, and allow users to connect via SSH.
+        sudo su
+        rm /etc/ssh/ssh_host_*_key* # Remove old keys
+        dpkg-reconfigure openssh-server # Generate new keys
+        systemctl enable ssh # Enable SSH service to start on boot
+        grep -q "^AllowUsers" /etc/ssh/sshd_config || echo "AllowUsers kali root" >> /etc/ssh/sshd_config # Add line at bottom to allow user
+        systemctl start ssh # Start SSH service
+        systemctl status ssh # Check SSH service status
+
+#Service Management File Paths
+    /lib/systemd/system # Systemd service unit files
+    /run/systemd/system # Runtime systemd service unit files
+    /etc/systemd/system # Systemd service unit files
+
+#endregion
+
+#region User and Group Management
+
+# Commands to manage users and groups.
+getent
+    # Checks the system database for user info.
+
+    # Check the passwd file for users named `kaliuser`
+        getent passwd kaliuser
+
+passwd
+    # Lists all users in the system.
+
+    # List all users and return info for `kaliuser`
+        passwd -S kaliuser
+
+    # Change the password for a user
+        passwd <username>
+
+    # disable a user account
+        passwd -l <username>
+
+adduser
+    # Adds a new user to the system.
+
+    # Add a new user with a home directory and default shell
+        adduser <username> --home /home/<username> --shell /bin/bash
+
+    # Add a new user with a specific group and password
+        adduser <username> --group <groupname> --password <password>
+
+usermod
+    # Modifies an existing user.
+
+    # Change the user's shell to `/bin/bash`
+        usermod -s /bin/bash <username>
+
+    # Add a user to a group
+        usermod -aG <groupname> <username>
+
+groups
+    # Displays the groups a user belongs to.
+
+    # Show groups for `kaliuser`
+        groups kaliuser
+
+addgroup
+    # Adds a new group to the system.
+
+    # Add a new group named `developers`
+        addgroup developers
+
+delgroup
+    # Deletes a group from the system.
+
+    # Delete the group `developers`
+        delgroup developers
+
+# User and Group Management File Paths
+    /etc/passwd # List of users
+    /etc/shadow # Encrypted passwords of users
+    /etc/groups # List of groups
+    /etc/gshadow # Encrypted passwords of groups
+    /etc/sudoers # List of users with sudo privileges
+
+#endregion
+
+#region Process Management
+# Commands to manage processes.
+
+ps
+    # Displays information about running processes.
+
+    # Show all processes with detailed information
+        ps aux
+
+top
+    # Displays real-time system resource usage.
+
+    # Monitor system resources
+        top
+
+kill
+    # Terminates a process by its PID.
+
+    # Kill the process with PID 1234
+        kill 1234
+
+killall
+    # Terminates all processes with a specific name.
+
+    # Kill all `firefox` processes
+        killall firefox
+
+jobs
+    # Lists background jobs in the current shell.
+
+    # Display all background jobs
+        jobs
+
+fg
+    # Brings a background job to the foreground.
+
+    # Bring job `%1` to the foreground
+        fg %1
+
+bg
+    # Resumes a background job.
+
+    # Resume job `%1` in the background
+        bg %1
+
+# Process Management File Paths
+    /proc # Virtual filesystem for process information
+    /proc/[pid] # Directory for each process with PID [pid]
+    /proc/[pid]/cmdline # Command line arguments for process [pid]
+#endregion
+
+#endregion
+
+#region Networking
+# Commands for network-related tasks.
+
+ping
+    # Tests connectivity to a host.
+
+    # Ping `google.com`
+        ping google.com
+
+curl
+    # Fetches data from a URL.
+
+    # Download the content of `https://example.com`
+        curl https://example.com
+
+wget
+    # Downloads files from a URL.
+
+    # Download `file.txt` from a URL
+        wget https://example.com/file.txt
+
+ifconfig
+    # Displays network interface information.
+
+    # Bring an interface up
+        ifconfig <interface-name> up
+
+netstat
+    # Displays active network connections.
+
+    # Show all active connections
+        netstat -tuln
+
+ip
+    # Displays and manipulates routing, devices, policy routing, and tunnels.
+
+    # Show all interfaces
+        ip link show
+
+    # Show details of a specific interface
+        ip addr show <interface-name>
+
+    # Set IP and Gateway
+        ip addr add 10.75.1.71/24 dev eth0
+        ip route del default
+        ip route add default via 10.75.1.1 dev eth0
+
+route
+    # Displays and manipulates the IP routing table.
+
+    # Show the routing table
+        route -n
+
+    # Add a static route
+        route add -net <network> netmask <netmask> gw <gateway> dev <interface-name>
+
+    # Delete a static route
+        route del -net <network> netmask <netmask> gw <gateway> dev <interface-name>
+#endregion
+
+#region Package Management
+# Commands to manage software packages.
+
+apt-get
+    # Package manager for Debian-based systems.
+
+    # Update the package list
+        apt-get update
+
+    # Upgrade all installed packages
+        apt-get upgrade
+
+    # Install a package
+        apt-get install <package-name>
+
+    # Remove a package
+        apt-get remove <package-name>
+
+apt
+    # Advanced package tool for Debian-based systems.
+    #Has a similar syntax to apt-get.
+
+    # Install a package
+        apt install <package-name>
+
+    # Remove a package
+        apt remove <package-name>
+
+dpkg
+    # Package manager for Debian-based systems.
+
+    # Install a package from a `.deb` file
+        dpkg -i <package.deb>
+
+    # Remove a package
+        dpkg -r <package_name>
+
+#Format of the Sources.list file
+    # The sources.list file contains a list of repositories (package sources) from which packages can be downloaded.
+
+    # The format of each line in sources.list is as follows:
+        deb [options] uri distribution [components]
+        deb-src [options] uri distribution [components]
+            # The `deb` line specifies a binary package repository.
+            # The `deb-src` line specifies a source package repository.
+            # `uri` is the URL of the repository. This portion can start with http://, ftp://, or file:// or cdrom:**.
+                # **cdrom: needs to be added using apt-cdrom command.
+            # `distribution` is the name of the distribution (e.g., stable, testing).
+            # `components` are the sections of the repository (e.g., main, contrib, non-free).
+
+    # Example entry in sources.list
+        deb http://deb.debian.org/debian/ stable main contrib non-free
+
+#Repos
+
+    #Adds the debian repo to sources so you can download packages with apt
+    	echo "deb http://deb.debian.org/debian/ stable main contrib non-free" >> /etc/apt/sources.list
+    #Adds the debian security repo to sources so you can download packages with apt
+    	echo "deb http://security.debian.org/debian-security stable-security main contrib non-free" >> /etc/apt/sources.list
+    #Adds the debian backports repo to sources so you can download packages with apt
+    	echo "deb http://deb.debian.org/debian/ stable-backports main contrib non-free" >> /etc/apt/sources.list
+    #Adds the debian testing repo to sources so you can download packages with apt
+    	echo "deb http://deb.debian.org/debian/ testing main contrib non-free" >> /etc/apt/sources.list
+    #Adds the debian unstable repo to sources so you can download packages with apt
+    	echo "deb http://deb.debian.org/debian/ unstable main contrib non-free" >> /etc/apt/sources.list
+
+    #Adds the deb kali repo to sources so you can download packages with apt
+    	echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" >> /etc/apt/sources.list
+    #Adds the deb kali security repo to sources so you can download packages with apt
+    	echo "deb http://security.kali.org/kali-security kali-rolling/updates main contrib non-free" >> /etc/apt/sources.list
+    #Adds the deb kali backports repo to sources so you can download packages with apt
+    	echo "deb http://http.kali.org/kali kali-rolling-backports main contrib non-free" >> /etc/apt/sources.list
+    #Adds the deb kali testing repo to sources so you can download packages with apt
+    	echo "deb http://http.kali.org/kali kali-rolling-testing main contrib non-free" >> /etc/apt/sources.list
+    #Adds the deb kali unstable repo to sources so you can download packages with apt
+    	echo "deb http://http.kali.org/kali kali-rolling-unstable main contrib non-free" >> /etc/apt/sources.list
+
+    #Adds the ubuntu repo to sources so you can download packages with apt
+    	echo "deb http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu security repo to sources so you can download packages with apt
+    	echo "deb http://security.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu backports repo to sources so you can download packages with apt
+    	echo "deb http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu testing repo to sources so you can download packages with apt
+    	echo "deb http://archive.ubuntu.com/ubuntu/ focal-proposed main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu unstable repo to sources so you can download packages with apt
+    	echo "deb http://archive.ubuntu.com/ubuntu/ focal-unstable main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu ppa repo to sources so you can download packages with apt
+    	echo "deb http://ppa.launchpad.net/ubuntu/ppa/ubuntu focal main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu ppa security repo to sources so you can download packages with apt
+    	echo "deb http://ppa.launchpad.net/ubuntu/ppa-security/ubuntu focal-security main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu ppa backports repo to sources so you can download packages with apt
+    	echo "deb http://ppa.launchpad.net/ubuntu/ppa-backports/ubuntu focal-backports main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu ppa testing repo to sources so you can download packages with apt
+    	echo "deb http://ppa.launchpad.net/ubuntu/ppa-testing/ubuntu focal-proposed main restricted universe multiverse" >> /etc/apt/sources.list
+    #Adds the ubuntu ppa unstable repo to sources so you can download packages with apt
+    	echo "deb http://ppa.launchpad.net/ubuntu/ppa-unstable/ubuntu focal-unstable main restricted universe multiverse" >> /etc/apt/sources.list
+
+# Package File Paths
+    /var/cache/apt/archives # Cached package files
+    /var/lib/dpkg/status # Package status file
+    /etc/apt/sources.list # Package sources list
+    /etc/apt/trusted.gpg # Trusted GPG keys for package verification		
+#endregion
+
+#region Remote Commands
+# Executing commands on remote systems using SSH.
+
+ssh
+    # Executes a command on a remote host via SSH.
+
+    # List files on a remote host
+        ssh user@remote_host "ls -l /path/to/directory"
+
+scp
+    # Copies a file to a remote host via SCP.
+
+    # Copy `file.txt` to a remote host
+        scp file.txt user@remote_host:/path/to/destination
+
+rsync
+    # Synchronizes files between local and remote systems.
+
+    # Sync files to a remote host
+        rsync -avz /local/path user@remote_host:/remote/path
+
+zmodload zsh/net/tcp
+    # Loads the Zsh TCP module for advanced networking.
+
+    # Open a TCP connection to `google.com` on port 80
+        ztcp google.com 80
+#endregion
+
+#region Cron Jobs
+#List all for current user
+	crontab -l
+
+#Script to get jobs for all users
+	#!/bin/bash
+	for user in $(cut -f1 -d: /etc/passwd); do
+		echo "Crontab for $user:"
+		sudo crontab -u $user -l
+		echo ""
+	done
+
+#Paths to system cron jobs
+	/etc/cron.hourly
+	/etc/cron.daily
+	/etc/cron.weekly
+	/etc/cron.monthly
+
+# Script to get system wide cron jobs
+	#!/bin/bash
+
+	# Define the system-wide cron directories
+	cron_dirs=(/etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly)
+
+	# Loop through each directory and list the cron jobs
+	for dir in "${cron_dirs[@]}"; do
+		echo "Checking $dir for cron jobs:"
+		if [[ -d "$dir" ]]; then
+			ls -la "$dir"
+		else
+			echo "Directory $dir does not exist."
+		fi
+		echo ""
+	done
+#endregion
+
+#region PostgreSQL
+# PostgreSQL commands for database management.
+
+psql
+    # PostgreSQL interactive terminal.
+
+    # Connect to a database
+        psql -U username -d database_name
+
+    # List all databases
+        \l
+
+    # List all tables in the current database
+        \dt
+
+    # Describe a table structure
+        \d table_name
+
+    # Execute a SQL command
+        SELECT * FROM table_name;
+
+    # Exit the PostgreSQL prompt
+        \q
+
+createuser
+    # Creates a new PostgreSQL user.
+
+    # Create a new user with superuser privileges
+        createuser --superuser username
+
+createdb
+    # Creates a new PostgreSQL database.
+
+    # Create a new database owned by a specific user
+        createdb -O username database_name
+
+    # Use the postgres user to create a new user and database. Then assign the user as the owner of the database.
+    su - postgres
+    createuser -P king_phisher
+    createdb -T template0 -E UTF-8 -O king_phisher king_phisher
+    exit
+
+    # Test that we can connect to the database using the socket listening on localhost
+    psql -h localhost -U king_phisher -d king_phisher
+
+postresql-common
+    # Debian specific PostgreSQL package for managing PostgreSQL clusters.
+    # It provides the init script and configuration files for PostgreSQL.
+
+# PostgreSQL File Paths
+    /var/lib/postgresql/12/main/pg_hba.conf  # PostgreSQL client authentication configuration file.
+    /var/lib/postgresql/12/main/postgresql.conf  # PostgreSQL main configuration file.
+    /var/lib/postgresql/12/main/pg_ident.conf  # PostgreSQL user name mapping file.
+#endregion
+
+#region Apache
+# Apache commands for web server management.
+
+apache2ctl
+    # Apache HTTP server control interface.
+
+    # Check the syntax of the configuration files
+        apache2ctl configtest
+
+    # Start the Apache server
+        apache2ctl start
+
+    # Stop the Apache server
+        apache2ctl stop
+
+    # Restart the Apache server
+        apache2ctl restart
+
+    # Reload the Apache server configuration without restarting
+        apache2ctl graceful
+
+#Start and stop Apache with systemd
+    systemctl start apache2
+    systemctl stop apache2
+    systemctl restart apache2
+
+a2enmod
+    # Enables an Apache module.
+
+    # Enable the `rewrite` module
+        a2enmod rewrite
+
+    # Enable the `ssl` module
+        a2enmod ssl
+
+a2dismod
+    # Disables an Apache module.
+
+    # Disable the `rewrite` module
+        a2dismod rewrite
+
+libapache-mod-php
+    # Apache module for PHP support.
+
+    # Install the `libapache2-mod-php` package
+        apt-get install libapache2-mod-php
+
+htpasswd
+    # Creates and manages user authentication files for Apache.
+
+    # Create a password file for basic authentication
+        htpasswd -c /etc/apache2/.htpasswd username
+
+    # Add a user to the password file
+        htpasswd /etc/apache2/.htpasswd username
+
+# Apache Virtual Hosts
+    # Configures multiple websites on a single server.        
+        vim /etc/apache2/sites-available/example.com.conf # Create a new virtual host configuration file in `/etc/apache2/sites-available/`.
+        a2ensite example.com.conf # Enable the new virtual host configuration
+        a2dissite 000-default.conf # Disable the default virtual host configuration
+        apache2ctl configtest # Test the Apache configuration for syntax errors
+        systemctl reload apache2 # Reload Apache to apply changes
+
+# Apache Directives
+# Apache configuration directives for web server settings are typically found in the main configuration file (`/etc/apache2/apache2.conf`) or in virtual host configuration files.
+    # DocumentRoot: Specifies the directory from which Apache serves files.
+    # ServerName: Specifies the hostname of the server.
+    # ErrorLog: Specifies the file where Apache logs errors.
+
+#Links
+    # Apache Documentation:
+        https://httpd.apache.org/docs/current/    
+    # List of all Apache Directives:
+        https://httpd.apache.org/docs/current/mod/directives.html
+    # List of all Apache Modules:
+        https://httpd.apache.org/docs/current/mods-available.html
+    # List of all Apache Configuration Files:
+        https://httpd.apache.org/docs/current/configuring.html
+
+#Apache File Paths
+    /etc/apache2/apache2.conf  # Main Apache configuration file.
+    /etc/apache2/sites-available/  # Directory for available virtual host configurations.
+    /etc/apache2/sites-enabled/  # Directory for enabled virtual host configurations.
+    /var/www/html/  # Default document root directory for Apache.
+    /var/log/apache2/access.log  # Access log file for Apache.
+    /var/log/apache2/error.log  # Error log file for Apache.
+    /etc/apache2/conf-available/  # Directory for available Apache configuration files.
+    /etc/apache2/conf-enabled/  # Directory for enabled Apache configuration files.
+    /etc/apache2/mods-enabled/  # Directory for enabled Apache modules.
+    /etc/apache2/mods-available/  # Directory for available Apache modules.
+    /etc/apache2/ports.conf  # Configuration file for Apache ports.
+
+#endregion
+
+#region Securing, Monitoring and Logging
+
+#region Securing the System
+#"Security is a process, not a product." - Bruce Schneier
+
+# General security practices.
+    # Keep the system updated with security patches.
+    # Use strong passwords and change them regularly.
+    # Limit user privileges and use the principle of least privilege.
+    # Regularly back up important data and configurations.
+    # Monitor system logs for unusual activity.
+    # Use firewalls to restrict access to services.
+    # Encrypt sensitive data and communications.
+    # Disable unused services and ports.
+    # set up a nuke feature to wipe the system.
+    # Specific tip for pentesting laptop: Forbid all outbound traffic except the traffic over the VPN tunnel so you know immediately if the VPN tunnel is down.
+
+# Securing Network Services
+    # Use SSH instead of Telnet for remote access.
+    # Use HTTPS instead of HTTP for web services.
+    # Use secure protocols (e.g., SFTP, FTPS) for file transfers.
+    # Disable root login over SSH and use key-based authentication.
+    # Use strong encryption algorithms for VPNs and secure communications.
+    # Reset any default passwords.
+    # Check kali.org/docs/ and tools.kali.org for services that need special care to secure.
+
+# Firewall and Packet Filtering
+    # netfilter (iptables) is the default firewall for Linux.
+    # Use iptables or fwbuilder to configure firewall rules.
+    # Allow only necessary ports and services.
+    # Block all incoming traffic by default and allow specific services.
+    # Use logging to monitor dropped packets and suspicious activity.
+    # Use fail2ban to protect against brute-force attacks on services.
+
+# Netfilter Behavior
+    # Netfilter is a framework provided by the Linux kernel for packet filtering and network address translation (NAT).
+    # It allows you to define rules for how packets should be handled based on various criteria, such as source/destination IP addresses, ports, and protocols.
+    # Netfilter operates at the kernel level, providing high performance and flexibility for network traffic management.
+    # Netfilter uses four tables:
+        # filter: Default table for packet filtering - Chains: INPUT, OUTPUT, FORWARD.
+        # nat: Used for network address translation - Chains: PREROUTING, POSTROUTING, OUTPUT.
+        # mangle: Used for specialized packet alteration - Chains: PREROUTING, POSTROUTING, INPUT, OUTPUT, FORWARD.
+        # raw: Used for configuring exemptions from connection tracking - Chains: PREROUTING, OUTPUT.
+    
+
+# Commands to manage netfilter
+
+iptables
+    # Linux firewall utility for configuring packet filtering rules.
+
+    # Syntax for iptables commands
+        iptables -L -n -v # List current iptables rules
+        iptables -N chain # Create a new chain
+        iptables -X chain # Delete a chain
+        iptables -A chain rule # Add a rule at the end of a chain        
+        iptables -I chain rule_num rule # Insert a rule at the beginning of a chain
+        iptables -D chain rule_num (OR -D chain rule) # Delete a specific rule from a chain
+        iptables -F chain # Flush all rules in a chain
+        iptables -P chain policy # Set the default policy for a chain
+        iptables -n -L INPUT --line-numbers # List all rules in the INPUT chain with line numbers
+
+    # Silently block incoming traffic from the IP address 10.0.1.5 and the 31.13.74.0/24 class C subnet
+        iptables -A INPUT -s 10.0.1.5 -j DROP # Block a specific IP address
+        iptables -A INPUT -s 31.13.74.0/24 -j DROP # Block a specific subnet
+        iptables -n -L INPUT # List all rules in the INPUT chain
+
+    # allow users to connect to SSH, HTTP, and IMAP services
+        iptables -A INPUT -p tcp --dport 22 -j ACCEPT # Allow SSH connections
+        iptables -A INPUT -p tcp --dport 80 -j ACCEPT # Allow HTTP connections
+        iptables -A INPUT -p tcp --dport 143 -j ACCEPT # Allow IMAP connections
+
+    # Block all incoming traffic by default
+        iptables -P INPUT DROP
+
+    # Allow outgoing traffic by default
+        iptables -P OUTPUT ACCEPT
+
+    # Save iptables rules to a file
+        iptables-save > /etc/iptables/rules.v4
+
+ip6tables
+    # IPv6 version of iptables for configuring packet filtering rules.
+    # Similar syntax to iptables.
+
+fwbuilder
+    # A graphical firewall configuration tool for Linux.
+
+    # Install fwbuilder
+        apt-get install fwbuilder
+
+# Implementing firewall rules each time the system boots
+    # Create firewall configuration script.
+        #This can be done using fwbuilder or manually writing a script.
+            # Example script to set up iptables rules:
+                #!/bin/bash
+                iptables -F  # Flush existing rules
+                iptables -P INPUT DROP  # Set default policy to DROP for INPUT chain
+                iptables -P OUTPUT ACCEPT  # Set default policy to ACCEPT for OUTPUT chain
+                iptables -A INPUT -p tcp --dport 22 -j ACCEPT  # Allow SSH connections
+                    # Documentation on building iptables rules can be found at https://www.netfilter.org/documentation/index.html.
+    # Point to the script in the /etc/network/interfaces file using the up directive.
+        # Example:
+            auto eth0
+            iface eth0 inet static
+                address 192.168.0.1
+                network 192.168.0.0
+                netmask 255.255.255.0
+                broadcast 192.168.0.255
+                up /usr/local/etc/arrakis.fw  # Path to the script. In this case, the script is called arrakis.fw, and is located in the /usr/local/etc directory.
+#endregion
+
+#region Monitoring and Logging
+
+logcheck
+    # A tool for monitoring system logs and sending alerts for unusual activity.
+
+    # Install logcheck
+        apt-get install logcheck
+
+    # Configure logcheck
+        vim /etc/logcheck/logcheck.conf  # Main configuration file for logcheck.
+        vim /etc/logcheck/logcheck.logfiles  # Configuration file for log file monitoring.
+
+    # Run logcheck manually
+        logcheck -o  # Run logcheck in offline mode.
+        logcheck -s  # Run logcheck in silent mode.
+
+top
+    # Displays real-time system resource usage.
+
+    # Show system resource usage
+        top
+        # Press 'q' to exit top.
+
+#Guil tools for monitoring system resources.
+xfce4-taskmanager # XFCE Task Manager
+gnome-system-monitor # GNOME System Monitor
+ksysguard # KDE System Monitor
+mate-system-monitor # MATE System Monitor
+
+#Detecting Changes to System Files
+    # These tools can detect changes to system files and directories.
+
+dpkg --verify
+    # Verifies the integrity of installed packages.
+
+aide
+    # Advanced Intrusion Detection Environment.
+
+    # Initialize aide database
+        aideinit
+
+    # Check for changes
+        aide --check
+
+tripwire
+    # File integrity checker.
+
+    # Initialize tripwire database
+        tripwire --init
+
+    # Check for changes
+        tripwire --check
+
+samhain
+    # A tool for monitoring system changes and detecting intrusions.
+
+    # Initialize samhain database
+        samhain --update
+
+    # Check for changes
+        samhain --check
+
+    # Check for changes in system files and directories.
+        samhain checksecurity
+        
+    # Check for rootkits and other malicious software.
+        samhain chkrootkit
+    
+    # Check for rootkits and other malicious software.
+        samhain rkhunter
+
+# Monitor & Logging File Paths
+    
+    /etc/rsyslog.conf  # Configuration file for rsyslog daemon.
+    /var/log/syslog            # General system log file.
+    /var/log/auth.log          # Authentication and authorization log.
+    /var/log/messages          # General message log (used in some distributions).
+    /var/log/secure            # Security-related log (used in some distributions).
+    /var/log/boot.log          # Boot process log.
+    /var/log/dpkg.log          # Log of package installations and removals (Debian-based systems).
+    /var/log/apt/history.log   # Log of apt package manager history.
+#endregion
+
+#endregion
+
+#region Scripting Essentials
+# Parameter Definitions and Attributes + Shell Variables and I/O + Control Structures and Functions + Error Handling and Best Practices.
+
+#region Parameter Definitions and Attributes
+# Handling script arguments in Bash.
+
+echo "Script name: $0"
+    # Displays the name of the script.
+
+    # Show the script name
+        ./script.sh
+
+echo "First argument: $1"
+    # Displays the first argument passed to the script.
+
+    # Show the first argument
+        ./script.sh arg1
+
+echo "All arguments: $@"
+    # Displays all arguments passed to the script.
+
+    # Show all arguments
+        ./script.sh arg1 arg2
+
+echo "Number of arguments: $#"
+    # Displays the number of arguments passed to the script.
+
+    # Show the number of arguments
+        ./script.sh arg1 arg2
+
+for arg in "$@"; do
+    # Using a loop to process all arguments.
+
+    # Process each argument
+        echo "Argument: $arg"
+done
+
+while [ $# -gt 0 ]; do
+    # Shift command to process arguments one by one.
+
+    # Process each argument
+        echo "Processing argument: $1"
+        shift
+done
+
+name=${1:-"DefaultName"}
+    # Default values for parameters.
+
+    # Use the first argument if provided, otherwise default to "DefaultName"
+        ./script.sh John  # name="John"
+        ./script.sh       # name="DefaultName"
+
+if [ $# -lt 1 ]; then
+    # Checking for required arguments.
+
+    # Ensure at least one argument is provided
+        echo "Usage: $0 <required_argument>"
+        exit 1
+fi
+
+while getopts "a:b:c" opt; do
+    # Using getopts for parsing options and flags.
+
+    # Parse options and flags
+        case $opt in
+            a) echo "Option -a with value $OPTARG";;
+            b) echo "Option -b with value $OPTARG";;
+            c) echo "Option -c (no value)";;
+            *) echo "Invalid option"; exit 1;;
+        esac
+done
+
+echo "All arguments: $*"
+    # `$*` expands all arguments as a single string (Zsh-specific behavior).
+
+    # Show all arguments as a single string
+        ./script.sh arg1 arg2
+
+echo "All arguments (individually): $@"
+    # `$@` expands all arguments as separate strings.
+
+    # Show all arguments individually
+        ./script.sh arg1 arg2
+
+typeset -i num=42
+    # Zsh supports named parameters with attributes.
+
+    # Declare `num` as an integer
+        echo $((num + 1))  # 43
+#endregion
+
+#region Shell Variables and I/O
+VARIABLE=value
+    # Assigns a value to a variable.
+
+    # Set the variable `NAME` to "John"
+        NAME="John"
+
+echo
+    # Displays the value of a variable.
+
+    # Show the value of `NAME`
+        echo $NAME
+
+export
+    # Makes a variable available to child processes.
+
+    # Add `/new/path` to the `PATH` variable
+        export PATH=$PATH:/new/path
+
+unset
+    # Removes a variable.
+
+    # Remove the variable `NAME`
+        unset NAME
+
+typeset
+    # Declares a variable (similar to `declare` in Bash).
+
+    # Set the variable `NAME` to "John"
+        typeset NAME="John"
+
+setopt
+    # Enables a shell option.
+
+    # Enable case-insensitive globbing
+        setopt NO_CASE_GLOB
+
+unsetopt
+    # Disables a shell option.
+
+    # Disable case-insensitive globbing
+        unsetopt NO_CASE_GLOB
+
+# Redirecting input and output.
+
+<command> >
+    # Redirects output to a file (overwrites).
+
+    # Save the output of `ls` to `output.txt`
+        ls > output.txt
+
+<command> >>
+    # Redirects output to a file (appends).
+
+    # Append the output of `ls` to `output.txt`
+        ls >> output.txt
+
+<command> 2>
+    # Redirects error output to a file.
+
+    # Save error messages to `error.txt`
+        ls non_existent_file 2> error.txt
+
+<command> &>
+    # Redirects both standard and error output to a file.
+
+    # Save all output to `output.txt`
+        ls &> output.txt
+
+<command> |
+    # Pipes the output of one command to another.
+
+    # Pipe the output of `ls` to `grep`
+        ls | grep "file"
+
+read -p
+    # Prompts the user for input and stores it in a variable.
+
+    # Prompt for the user's name
+        read -p "Enter your name: " name
+
+echo
+    # Displays a message.
+
+    # Greet the user
+        echo "Hello, $name!"
+
+printf
+    # Formats and displays output.
+
+    # Display formatted text
+        printf "Name: %s, Age: %d\n" "John" 25
+#endregion
+
+#region Control Structures and Functions
+if
+    # Executes code based on a condition.
+
+    # Check if a variable is equal to 1
+        if [ $var -eq 1 ]; then
+            echo "Variable is 1"
+        elif [ $var -eq 2 ]; then
+            echo "Variable is 2"
+        else
+            echo "Variable is not 1 or 2"
+        fi
+
+for
+    # Executes code for each item in a list.
+
+    # Iterate over a list of items
+        for item in a b c; do
+            echo "Item: $item"
+        done
+
+while
+    # Executes code while a condition is true.
+
+    # Loop while a variable is less than 5
+        while [ $var -lt 5 ]; do
+            echo "Variable: $var"
+            var=$((var + 1))
+        done
+
+case
+    # Matches a variable against multiple patterns.
+
+    # Check the value of a variable
+        case $var in
+            "value1")
+                echo "Matched value1"
+                ;;
+            "value2")
+                echo "Matched value2"
+                ;;
+            *)
+                echo "Default case"
+                ;;
+        esac
+
+for ((i=1; i<=5; i++)); do
+    # C-style for loop in Bash.
+
+    # Loop from 1 to 5
+        echo "Iteration $i"
+done
+
+for var ({1..5}); do
+    # Zsh supports brace expansion directly in loops.
+
+    # Loop from 1 to 5
+        echo "Iteration $var"
+done
+
+[[ ]]
+    # Preferred syntax for conditionals in Zsh.
+
+    # Check if a variable is equal to 1
+        if [[ $var -eq 1 ]]; then
+            echo "Variable is 1"
+        fi
+
+# Defining and using functions in shell scripts.
+
+function_name
+    # Defines a function.
+
+    # Define a basic function
+        function_name() {
+            echo "This is a basic function."
+        }
+
+    # Call the function
+        function_name  # Output: This is a basic function.
+
+autoload -Uz
+    # Loads a function only when it is called.
+
+    # Load `my_function` on demand
+        autoload -Uz my_function
+#endregion
+
+#region Error Handling and Best Practices
+# Error Handling + Scripting Best Practices
+
+# Handling errors in shell scripts.
+
+set -e
+    # Exits the script if any command fails.
+
+trap
+    # Executes a command when an error occurs.
+
+    # Print an error message on failure
+        trap 'echo "An error occurred!"' ERR
+
+if [ $? -ne 0 ]; then
+    # Checks the exit status of the last command.
+
+    # Print a message if the last command failed
+        echo "The last command failed."
+fi
+
+set -o ERR_EXIT
+    # Exits the script if any command fails (similar to `set -e` in Bash).
+
+# Tips for writing clean and efficient shell scripts.
+
+- Use meaningful variable and function names.
+- Add comments to explain complex logic.
+- Use `set -e` to stop execution on errors.
+- Validate input using conditionals.
+- Modularize code into functions for reusability.
+
+#endregion
+
+#endregion
+
+#region Regular Expressions
+# regex full explanation can be found at https://www.regular-expressions.info/.
+
+# Commands and tools for working with regular expressions.
+
+grep
+    # Searches for lines matching a pattern in a file.
+
+    # Search for "error" in `log.txt`
+        grep "error" log.txt
+
+egrep
+    # Extended grep for more complex patterns.
+
+    # Search for "error" or "warning" in `log.txt`
+        egrep "error|warning" log.txt
+
+sed
+    # Stream editor for searching and replacing text.
+
+    # Replace "foo" with "bar" in `file.txt`
+        sed 's/foo/bar/g' file.txt
+
+awk
+    # Pattern scanning and processing language.
+
+    # Print lines containing "error" in `log.txt`
+        awk '/error/ {print $0}' log.txt
+
+grep -E
+    # Use `-E` for extended regex (equivalent to `egrep` in Bash).
+
+    # Search for "error" or "warning" in `log.txt`
+        grep -E "error|warning" log.txt
+
+#regex syntax and explanation
+    # Basic regex syntax
+        ^       # Start of line
+        $       # End of line
+        .       # Any character
+        *       # Zero or more occurrences of the previous character
+        +       # One or more occurrences of the previous character
+        ?       # Zero or one occurrence of the previous character
+        []      # Character class (e.g., [a-z], [0-9])
+        ()      # Grouping (e.g., (abc)+)
+        |       # Alternation (e.g., a|b)
+        \       # Escape special characters (e.g., \.)
+    # Anchors
+        ^abc    # Matches "abc" at the start of a line
+        abc$    # Matches "abc" at the end of a line
+    # Quantifiers
+        a*      # Matches zero or more "a"
+        a+      # Matches one or more "a"
+        a?      # Matches zero or one "a"
+        a{n}    # Matches exactly n occurrences of "a"
+        a{n,}   # Matches n or more occurrences of "a"
+        a{n,m}  # Matches between n and m occurrences of "a"
+    # Character Classes
+        [abc]   # Matches any character in the set (a, b, or c)
+        [^abc]  # Matches any character not in the set (not a, b, or c)
+        [a-z]   # Matches any lowercase letter
+        [0-9]   # Matches any digit
+        [A-Z]   # Matches any uppercase letter
+        [a-zA-Z] # Matches any letter (lowercase or uppercase)
+        [0-9a-fA-F] # Matches any hexadecimal digit
+    # Word Boundaries
+        \b      # Word boundary (e.g., \bword\b matches "word" as a whole word)
+        \B      # Non-word boundary (e.g., \Bword\B matches "word" within a word)
+    # Special Characters
+        \d      # Matches any digit (equivalent to [0-9])
+        \D      # Matches any non-digit (equivalent to [^0-9])
+        \w      # Matches any word character (equivalent to [a-zA-Z0-9_])
+        \W      # Matches any non-word character (equivalent to [^a-zA-Z0-9_])
+        \s      # Matches any whitespace character (space, tab, newline)
+        \S      # Matches any non-whitespace character
+        \n      # Matches a newline character
+        \t      # Matches a tab character
+        \r      # Matches a carriage return character
+        \f      # Matches a form feed character
+    # Regex Modifiers
+        i       # Case-insensitive matching (e.g., /pattern/i)
+        m       # Multiline matching (e.g., ^ and $ match start/end of lines)
+        s       # Dot matches newline (e.g., . matches any character including newline)
+        x       # Ignore whitespace and comments in the regex pattern
+    # Regex Examples
+        ^abc$   # Matches "abc" exactly
+        a.*b    # Matches "a" followed by any characters and then "b"
+        (abc|def) # Matches either "abc" or "def"
+        [0-9]{3} # Matches exactly three digits
+        \d{2,4}  # Matches between two and four digits
+        \w+      # Matches one or more word characters (letters, digits, or underscores)
+        \s*      # Matches zero or more whitespace characters
+        \bword\b  # Matches "word" as a whole word
+
+#endregion
+
+#region Useful File Paths
+
+## SSH
+/etc/ssh/sshd_config       # Configuration file for the SSH daemon.
+/etc/ssh/ssh_config        # Configuration file for the SSH client.
+
+## Startup Scripts
+/etc/rc.local              # Script executed at the end of each multi-user runlevel.
+/etc/init.d/               # Directory containing init scripts for services.
+/etc/systemd/system/       # Directory for systemd service unit files.
+
+## Logon Banner
+/etc/motd                  # Message of the Day displayed after login.
+
+## System Cron Jobs
+/etc/cron.hourly           # Directory for hourly cron jobs.
+/etc/cron.daily            # Directory for daily cron jobs.
+/etc/cron.weekly           # Directory for weekly cron jobs.
+/etc/cron.monthly          # Directory for monthly cron jobs.
+
+## System Logs
+/var/log/syslog            # General system log file.
+/var/log/auth.log          # Authentication and authorization log.
+/var/log/messages          # General message log (used in some distributions).
+/var/log/secure            # Security-related log (used in some distributions).
+/var/log/boot.log          # Boot process log.
+/var/log/dpkg.log          # Log of package installations and removals (Debian-based systems).
+/var/log/apt/history.log   # Log of apt package manager history.
+
+## System Configuration
+/etc/fstab                 # File system mount table.
+/etc/hosts                 # Static table for hostname-to-IP address mapping.
+/etc/resolv.conf           # DNS resolver configuration.
+/etc/network/interfaces    # Network interface configuration (Debian-based systems).
+/etc/sysctl.conf           # Kernel parameters configuration.
+/etc/hostname              # System hostname configuration.
+
+## System Users and Groups
+/etc/passwd                # List of system users and their information.
+/etc/shadow                # Encrypted passwords of system users.
+/etc/group                 # List of system groups.
+/etc/gshadow               # Encrypted passwords of system groups.
+/etc/sudoers               # Configuration file for sudo privileges.
+
+## System Services
+/lib/systemd/system        # Systemd service unit files.
+/run/systemd/system        # Runtime systemd service unit files.
+
+## System Backups
+/var/backups/              # Directory for system backup files.
+/etc/backup.conf           # Configuration file for backup settings.
+/etc/cron.d/backup         # Cron job configuration for backups.
+
+## System Packages
+/var/lib/dpkg/info/        # Metadata for installed packages (Debian-based systems).
+/var/cache/apt/archives/   # Cache of downloaded package files (Debian-based systems).
+/etc/apt/sources.list      # Package sources list.
+/etc/apt/trusted.gpg       # Trusted GPG keys for package verification.
+
+## System Environment Variables
+/etc/environment           # Global environment variables.
+/etc/profile               # System-wide shell initialization script.
+/etc/bash.bashrc           # System-wide Bash shell configuration.
+/etc/zsh/zshenv            # System-wide Zsh environment configuration.
+/etc/zsh/zshrc             # System-wide Zsh shell configuration.
+
+## System Shell Configuration
+/etc/profile.d/custom.sh              # Custom shell initialization script.
+/etc/profile.d/custom_aliases.sh      # Custom aliases for the shell.
+/etc/profile.d/custom_env.sh          # Custom environment variables.
+/etc/profile.d/custom_functions.sh    # Custom shell functions.
+/etc/profile.d/custom_prompt.sh       # Custom shell prompt configuration.
+
+## Networking
+/etc/network/interfaces    # Network interface configuration (Debian-based systems).
+
+## PostgreSQL
+/var/lib/postgresql/12/main/pg_hba.conf  # PostgreSQL client authentication configuration file.
+/var/lib/postgresql/12/main/postgresql.conf  # PostgreSQL main configuration file.
+/var/lib/postgresql/12/main/pg_ident.conf  # PostgreSQL user name mapping file.
+
+## Apache
+/etc/apache2/apache2.conf  # Main Apache configuration file.
+/etc/apache2/sites-available/  # Directory for available virtual host configurations.
+/etc/apache2/sites-enabled/  # Directory for enabled virtual host configurations.
+/var/www/html/  # Default document root directory for Apache.
+/var/log/apache2/access.log  # Access log file for Apache.
+/var/log/apache2/error.log  # Error log file for Apache.
+
+#endregion
+
+#region Miscellaneous
+#region Miscellaneous commands.
+
+# Commands to retrieve system and hardware information.
+
+uname -a
+    # Displays system information.
+
+    # Show system information
+        uname -a
+
+df -h
+    # Displays disk space usage.
+
+    # Show disk space usage
+        df -h
+
+free -m
+    # Displays memory usage.
+
+    # Show memory usage
+        free -m
+
+uptime
+    # Displays system uptime.
+
+    # Show system uptime
+        uptime
+
+#endregion
+
+#region Crack root password
+#Reboot your Linux system and wait for the GRUB menu to appear during the boot process.
+#Press ‘e’ to edit the boot parameters.
+#Find the line starting with ‘linux’ and change ‘ro’ (read-only) to ‘rw’ (read-write). Add ‘init=/bin/bash’ at the end of this line.
+#Press F10 to boot with these parameters.
+#Once the system boots, you’ll be at the bash prompt. Remount the root filesystem with write permissions using: mount -o remount,rw /
+#Reset the root password by typing: passwd root and then enter the new password twice when prompted.
+#Reboot the system by typing: exec /sbin/init
+
+##Process specific to RHEL
+	#Interrupt the Boot Process:
+	#Reboot your system.
+	#When the GRUB menu appears, press any key to interrupt the boot process.
+	#Edit Boot Parameters:
+	#Use the arrow keys to highlight the kernel you want to boot.
+	#Press e to edit the selected boot entry.
+	#Find the line that starts with linux and append rd.break at the end of this line.
+	#Press Ctrl + X to boot with these parameters.
+	#Remount the File System:
+	#Once the system boots into the emergency mode, remount the root file system with read and write permissions:
+	mount -o remount,rw /sysroot
+
+	#Change the root directory:
+	chroot /sysroot
+
+	#Reset the Root Password:
+	#Use the passwd command to reset the root password:
+	passwd
+
+	#Enter and confirm the new password.
+	#Relabel SELinux:
+	#Create a file to ensure SELinux relabels the file system on reboot:
+	touch /.autorelabel
+
+	#Exit the chroot environment:
+	exit
+
+	#Reboot the system:
+	reboot
+#endregion
+
+#endregion
