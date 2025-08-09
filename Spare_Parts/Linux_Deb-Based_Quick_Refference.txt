@@ -462,6 +462,11 @@ ip
         ip addr add 10.75.1.71/24 dev eth0
         ip route del default
         ip route add default via 10.75.1.1 dev eth0
+            # Set DNS
+                vim /etc/resolv.conf
+                # Add a line with with the nameserver IP address for each DNS server you want to use.
+                    nameserver 10.75.1.10
+                    nameserver 1.1.1.1
 
 route
     # Displays and manipulates the IP routing table.
@@ -979,7 +984,7 @@ samhain
 
 # Monitor & Logging File Paths
     
-    /etc/rsyslog.conf  # Configuration file for rsyslog daemon.
+    /etc/rsyslog.conf          # Configuration file for rsyslog daemon.
     /var/log/syslog            # General system log file.
     /var/log/auth.log          # Authentication and authorization log.
     /var/log/messages          # General message log (used in some distributions).

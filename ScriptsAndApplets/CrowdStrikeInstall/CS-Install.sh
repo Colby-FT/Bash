@@ -13,8 +13,23 @@ sles02="CS-Falcon-SLES-12.rpm"
 sles03="CS-Falcon-SLES-11.rpm"
 
 #Get the OS version
+# Try hostnamectl
 os=$(hostnamectl | grep "Operating System")
-versName=${os#*: }
+
+# If empty, try lsb_release -d
+if [ -z "$os" ]; then
+    os=$(lsb_release -d 2>/dev/null)
+fi
+
+# If still empty, exit with error
+if [ -z "$os" ]; then
+    echo "OS could not be determined"
+    exit 1
+else
+    echo "Detected OS: $os"
+    versName=${os#*: }
+fi
+
 
 # Change to the directory where the script is located
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
