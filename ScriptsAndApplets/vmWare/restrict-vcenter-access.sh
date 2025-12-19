@@ -4,9 +4,8 @@
 #This creates a deny any rule for SSH (port 22) and HTTPS (port 443), then explicitly allows specific IPs to access those ports and port 902. This does not restrict any other ports.
 
 # Define allowed IPs
-ALLOWED_IPS=(
-  <IPs-here i.e. 172.17.28.22 172.17.28.21 172.17.28.9>
-)
+ALLOWED_IPS=()
+#example: ALLOWED_IPS=(172.17.28.22 172.17.28.21 172.17.28.9)
 
 # Start and enable iptables service
 systemctl start iptables
